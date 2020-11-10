@@ -21,21 +21,6 @@ var welcomeRegionMessage; /* The welcome box - when the user enters a region */
 var hideMarkersBtn;
 var enableLocationBtn;
 
-/* Initialize all elements from HTML file */
-function initElements() {
-    currentRegionWeather = document.getElementById("currentRegionWeather");
-    hideMarkersBtn = document.getElementById("btnHideMarkers");
-    locationTrackingIcon = document.getElementById("btnEnableLocationTracking");
-    enableLocationBtn = document.getElementById("btnEnableLocation");
-    welcomeRegionMessage = document.getElementById("welcomeRegion");
-    /* Set icon for buttons */
-    hideMarkersBtn.src = VALUES_hide_map_markers;
-    locationTrackingIcon.src = VALUES_enable_location_tracking;
-    enableLocationBtn.src = VALUES_enable_location;
-    /* Hide the current region weather icon */
-    currentRegionWeather.style.visibility = "hidden";
-}
-
 /* Initialize and add the map */
 function initMap() {
     /* The map, centered at VALUES_mapStartCoordinates, with variables from <values.js> */
