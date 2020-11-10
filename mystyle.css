@@ -1,0 +1,163 @@
+            #map {
+                position: absolute;
+                /* Set the size of the div element that contains the map */
+                height: 100%;
+                width: 100%;
+            }
+            
+            body {
+                /* Map will cover all the web page in height */
+                height: 100vh;
+                /* Map will cover all the web page in width */
+                width: 100%;
+                /* The web page will have no margins or padding - full map */
+                margin: 0;
+                padding: 0
+            }
+            /* This image will be displayed when the user zoon in a region */
+            
+            #currentRegionWeather {
+                /* Display over map at a specific position */
+                position: absolute;
+                right: 50px;
+                bottom: 15px;
+            }
+            /* Bottom left buttons */
+            
+            .btn-custom {
+                /* Display over map at a specific position */
+                position: absolute;
+                /* Arrange button on middle */
+                right: 10px;
+                /* Arrange button on bottom */
+                bottom: 0;
+                /* Arrange button over map */
+                z-index: 50;
+                /* Limit the icon resolution */
+                width: 40px;
+                border-radius: 5px;
+            }
+            /* This button will hide/show all markers in the map */
+            
+            #btnHideMarkers {
+                bottom: 25vh;
+            }
+            /* This button will enabled/disable location tracking */
+            
+            #btnEnableLocationTracking {
+                bottom: 31vh;
+            }
+            /* This button will enable location */
+            
+            #btnEnableLocation {
+                bottom: 36.75vh;
+            }
+            /* The table is created in every InfoWindow of a marker */
+            
+            #welcomeRegion {
+                position: absolute;
+                left: 0;
+                bottom: 2rem;
+                width: 0;
+                max-height: 10%;
+                vertical-align: middle;
+                overflow: hidden;
+                transition: width 1s, height 2s;
+                background-color: black;
+                color: white;
+            }
+            
+            table {
+                /* All data is aranged in the middle of the cell */
+                text-align: center;
+                /* The cells are united - no space between them */
+                border-collapse: collapse;
+                /* Text color for the whole InfoWindow */
+                color: white;
+                /* Fixed width for InfoWindow */
+                width: 230px;
+                /* Fixed height for InfoWindow */
+                height: 150px;
+            }
+            /* The collumns of the InfoWindow */
+            
+            td,
+            th {
+                /* Top and bottom padding */
+                padding: 5% 0 5% 0;
+                /* Arrang data in middle - horizontal */
+                width: 50%;
+                /* Arrange data in middle - vertical */
+                vertical-align: middle;
+            }
+            /* The head of the table - the region and its weather */
+            
+            th {
+                background-color: rgba(0, 128, 0, 0.9);
+            }
+            /* The region data is separed by a different color */
+            
+            td {
+                background-color: rgba(79, 138, 31, 0.9);
+            }
+            /* The first cell (Region title) */
+            
+            th:first-child {
+                padding-left: 10%;
+                padding-right: 5%;
+            }
+            /* The second cell (Region weather) */
+            
+            th:last-child {
+                padding-right: 10%;
+                padding-left: 5%;
+                /* Increase font size for Region weather */
+                font-size: 16px;
+            }
+            
+            #airQualityRow {
+                /* Remove padding for the air quality cell */
+                padding-top: 0;
+            }
+            /* Air quality bar */
+            
+            #myProgress {
+                /* The width of the bar inside the table */
+                width: 80%;
+                /* Center in middle - horizontal */
+                margin: auto;
+                /* Center in middle - vertical */
+                vertical-align: middle;
+                /* Background for the bar */
+                background-color: grey;
+            }
+            /* Inside the air quality bar */
+            
+            #myBar {
+                /* The width inside the bar is the actual data - ex: 5% pollution air */
+                width: 0%;
+                /* The background inside the bar will be in dependence of data - 0% green and 100% red */
+                background-image: linear-gradient( to right, rgba(0, 255, 0, 0.5), rgba(128, 128, 0, 0.5));
+                /* Align the text inside (x%) in the middle of the bar */
+                text-align: center;
+                vertical-align: middle;
+            }
+            /* InfoWindow body */
+            
+            .gm-style .gm-style-iw {
+                /* Remove the padding - the table will cover the InfoWindow */
+                padding: 0;
+                /* Hide the InfoWindow body */
+                background-color: transparent;
+            }
+            /* Remove right and bottom white bars from InfoWindow - caused by scrollbars */
+            
+            .gm-style-iw-d {
+                overflow: hidden !important;
+            }
+            
+            #corrupted_data_infowindow {
+                padding: 5% 5% 5% 5%;
+                background-color: red;
+                margin: auto;
+            }
