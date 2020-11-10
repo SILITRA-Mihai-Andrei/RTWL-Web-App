@@ -57,6 +57,16 @@ function initElements() {
     enableLocationBtn.src = VALUES_enable_location;
     /* Hide the current region weather icon */
     currentRegionWeather.style.visibility = "hidden";
+    /* Set a welcome message when the map is ready */
+    setWelcome(true, undefined);
+    /* Add listeners for map */
+    /* When zoom is changed, draged or tilesloaded
+        check if the minimum zoom is big enough to display region weather 
+    */
+    map.addListener("zoom_changed", onMapEvent, false);
+    map.addListener("dragend", onMapEvent, false);
+    map.addListener("tilesloaded", onMapEvent, false);
+    /* Set currentPosition to a default coordinates - to detect if the location was moved or updated */
 }
 
 /* Write data to database */

@@ -29,16 +29,6 @@ function initMap() {
         center: VALUES_mapStartCoordinates,
         mapTypeId: VALUES_mapStartType
     });
-    /* Set a welcome message when the map is ready */
-    setWelcome(true, undefined);
-    /* Add listeners for map */
-    /* When zoom is changed, draged or tilesloaded
-        check if the minimum zoom is big enough to display region weather 
-    */
-    map.addListener("zoom_changed", onMapEvent, false);
-    map.addListener("dragend", onMapEvent, false);
-    map.addListener("tilesloaded", onMapEvent, false);
-    /* Set currentPosition to a default coordinates - to detect if the location was moved or updated */
     currentPosition = new google.maps.LatLng(VALUES_NOT_UPDATED_LOCATION.lat, VALUES_NOT_UPDATED_LOCATION.lng);
     currentRegion = null; /* There is no region on map yet */
 }
