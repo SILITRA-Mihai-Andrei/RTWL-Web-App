@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Real Time Weather Location Traffic System</title>
+    <link rel="icon" href="https://i94.servimg.com/u/f94/19/39/15/82/ic_lau10.jpg" type="image/icon type">
+    <script type="text/js" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwafdQtEEbxs3kM3axkvzypdlQEzgGn6M&callback=initMap&libraries=&v=weekly" defer></script>
+    <script type="text/js" src="https://github.com/SILITRA-Mihai-Andrei/RTWL-Web-App/blob/main/values.js"></script>
+    <script type="text/js" src="https://github.com/SILITRA-Mihai-Andrei/RTWL-Web-App/blob/main/map.js"></script>
+    <script type="text/js" src="JavaScript/values.js"></script>
+    <script type="text/js" src="JavaScript/map.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://github.com/SILITRA-Mihai-Andrei/RTWL-Web-App/blob/main/mystyle.css" />
+    <link rel="stylesheet" type="text/css" href="CSS/mystyle.css">
+</head>
+
+<body>
+    <!-- For free hosting -->
+    <a href="https://www.forumgratuit.ro" style="display: none;" target="_blank">forumgratuit.ro</a>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <img id="currentRegionWeather">
+    <img id="btnHideMarkers" class="btn-custom" onclick="hideMarkers();">
+    <img id="btnEnableLocationTracking" class="btn-custom" onclick="enableLocationTracking();">
+    <img id="btnEnableLocation" class="btn-custom" onclick="enableLocation();">
+    <div id="welcomeRegion"></div>
+
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+    <!-- Previously loaded Firebase SDKs -->
+    <!-- Initialize Firebase -->
+    <!-- <script defer src="./init-firebase.js">  -->
+    <script defer="" type="text/js" src="https://github.com/SILITRA-Mihai-Andrei/RTWL-Web-App/blob/main/init-firebase.js"></script>
+    <script></script>
+    <script defer src="JavaScript/init-firebase.js"></script>
+</body>
+
+</html>
