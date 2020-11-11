@@ -6,10 +6,10 @@ var database = firebase.database();
 var weatherData = [];
 var weatherRegions = [];
 var dangerRegions = [];
-initElements();
 
 /* Start listening to database (reading to each new modification) */
 readData();
+initElements();
 
 /* Create listener for reading database modification */
 function readData() {
