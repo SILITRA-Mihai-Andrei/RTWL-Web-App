@@ -40,31 +40,63 @@
             /* This button will hide/show all markers in the map */
             
             #btnHideMarkers {
-                bottom: 25vh;
+                bottom: 185px;
             }
             /* This button will enabled/disable location tracking */
             
             #btnEnableLocationTracking {
-                bottom: 31vh;
+                bottom: 232px;
             }
             /* This button will enable location */
             
             #btnEnableLocation {
-                bottom: 36.75vh;
+                bottom: 277px;
             }
             /* The table is created in every InfoWindow of a marker */
             
             #welcomeRegion {
                 position: absolute;
-                left: 0;
+                left: -360px;
                 bottom: 2rem;
-                width: 0;
-                max-height: 10%;
+                width: 320px;
+                max-height: 20%;
+                padding: 20px;
                 vertical-align: middle;
                 overflow: hidden;
-                transition: width 1s, height 2s;
-                background-color: black;
+                background-color: rgba(0, 0, 0, 0.75);
                 color: white;
+            }
+            
+            .welcomeMessageStart {
+                animation-name: welcomeMessageAnimationStart;
+                animation-duration: 2s;
+                animation-iteration-count: 1;
+                animation-fill-mode: forwards;
+            }
+            
+            @keyframes welcomeMessageAnimationStart {
+                from {
+                    transform: translate(-360px);
+                }
+                to {
+                    transform: translate(360px);
+                }
+            }
+            
+            .welcomeMessageEnd {
+                animation-name: welcomeMessageAnimationEnd;
+                animation-duration: 2s;
+                animation-iteration-count: 1;
+                animation-fill-mode: forwards;
+            }
+            
+            @keyframes welcomeMessageAnimationEnd {
+                from {
+                    transform: translate(360px);
+                }
+                to {
+                    transform: translate(-360px);
+                }
             }
             
             table {

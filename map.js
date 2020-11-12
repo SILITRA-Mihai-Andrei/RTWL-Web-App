@@ -14,9 +14,12 @@ var infoWindowContent; /* Custom InfoWindow for marker */
 var isValidData = true; /* The data received from database is valid? */
 var isLocationTrackingEnabled = false; /* Is location tracking enabled or not */
 
+var welcomeRegionMessage; /* The welcome box - when the user enters a region */
+var welcomeMessageIsActive = false;
+var welcomeMessageList = [];
+
 var currentRegionWeather; /* The weather icon of the current zoomed region */
 var locationTrackingIcon; /* Location tracking icon */
-var welcomeRegionMessage; /* The welcome box - when the user enters a region */
 /* Buttons over map */
 var hideMarkersBtn;
 var enableLocationBtn;
@@ -31,6 +34,31 @@ function initMap() {
     });
     currentPosition = new google.maps.LatLng(VALUES_NOT_UPDATED_LOCATION.lat, VALUES_NOT_UPDATED_LOCATION.lng);
     currentRegion = null; /* There is no region on map yet */
+}
+
+/* Initialize all elements from HTML file */
+function initElements() {
+    currentRegionWeather = document.getElementById("currentRegionWeather");
+    hideMarkersBtn = document.getElementById("btnHideMarkers");
+    locationTrackingIcon = document.getElementById("btnEnableLocationTracking");
+    enableLocationBtn = document.getElementById("btnEnableLocation");
+    welcomeRegionMessage = document.getElementById("welcomeRegion");
+    /* Set icon for buttons */
+    hideMarkersBtn.src = VALUES_hide_map_markers;
+    locationTrackingIcon.src = VALUES_enable_location_tracking;
+    enableLocationBtn.src = VALUES_enable_location;
+    /* Hide the current region weather icon */
+    currentRegionWeather.style.visibility = "hidden";
+    /* Set a welcome message when the map is ready */
+    setWelcome(true, undefined);
+    /* Add listeners for map */
+    /* When zoom is changed, draged or tilesloaded
+        check if the minimum zoom is big enough to display region weather 
+    */
+    map.addListener("zoom_changed", onMapEvent, false);
+    map.addListener("dragend", onMapEvent, false);
+    map.addListener("tilesloaded", onMapEvent, false);
+    /* Set currentPosition to a default coordinates - to detect if the location was moved or updated */
 }
 
 /* Initialize location tracking */
@@ -190,12 +218,7 @@ function addRegionArea(position, regionData) {
     ];
     /* Get weather string from list (ex: "Moderate rain") */
     let weather = regionData["weather"];
-    /* Get area color depending on weather condition */
-    let color = "#00FF00"; /* Green area - no danger */
-    if (VALUES_weather_key_medium_danger.includes(weather)) /* Orange area - small-medium danger */
-        color = "#FF8000";
-    else if (VALUES_weather_key_high_danger.includes(weather)) /* Red area - high danger */
-        color = "#FF0000";
+    let color = getWeatherAreaColor(weather);
     /* Construct the polygon */
     const poly = new google.maps.Polygon({
         paths: areaCoords,
@@ -290,7 +313,7 @@ function hideMarkers() {
         /* Show all markers and polygons */
         showMarkers();
         /* TESTING */
-        setWelcome(true, markers[2]);
+        setWelcome(true, markers[1]);
     }
 }
 
@@ -485,19 +508,33 @@ function getWeatherColor(weather) {
     else return VALUES_weather_color_low_danger;
 }
 
+/* Get area color depending on weather condition */
+function getWeatherAreaColor(weather) {
+    let color = VALUES_weather_area_color_low_danger; /* Green area - no danger */
+    if (VALUES_weather_key_medium_danger.includes(weather)) /* Orange area - small-medium danger */
+        color = VALUES_weather_area_color_medium_danger;
+    else if (VALUES_weather_key_high_danger.includes(weather)) /* Red area - high danger */
+        color = VALUES_weather_area_color_high_danger;
+    return color;
+}
+
 /* Show and hide the welcome region */
 function setWelcome(start, marker) {
-    if (start == true) { /* Show the welcome message */
-        welcomeRegionMessage.style.width = VALUES_welcome_region_width;
-        welcomeRegionMessage.style.maxHeight = VALUES_welcome_region_max_height;
-        welcomeRegionMessage.style.padding = VALUES_welcome_region_padding;
-        welcomeRegionMessage.visibility = "visible";
+    /* If another message must be displayed but there is already and active one */
+    if (start == true && welcomeMessageIsActive) {
+        /* Store the marker in list to display it after current one is finished */
+        if (marker instanceof google.maps.Marker) {
+            welcomeMessageList.push(marker);
+        }
+        return;
+    }
+    if (start == true && !welcomeMessageIsActive) { /* Show the welcome message */
         if (marker == undefined) { /* First welcome message - after map initialization */
             welcomeRegionMessage.style.backgroundColor = VALUES_welcome_message_map_init_background_color;
             welcomeRegionMessage.innerHTML = VALUES_welcome_message_map_init;
         } else {
             let weather = weatherData[markers.indexOf(marker)];
-            welcomeRegionMessage.style.backgroundColor = getWeatherColor(weather["weather"]);
+            welcomeRegionMessage.style.backgroundColor = getWeatherAreaColor(weather["weather"]);
             welcomeRegionMessage.innerHTML =
                 VALUES_welcome_message_content
                 .replace(STRING_PLACEHOLDER_WEATHER, weather["weather"])
@@ -506,13 +543,28 @@ function setWelcome(start, marker) {
                 .replace(STRING_PLACEHOLDER_AIR, weather["air"])
                 .replace(STRING_PLACEHOLDER_DANGER, "None");
         }
+        setWelcomeMessageAnimation(true);
+        /* Set timeout for closing the message after a time */
         setTimeout(function() { setWelcome(false, null); }, VALUES_welcome_message_duration);
-    } else { /* Hide the welcome message */
-        welcomeRegionMessage.visibility = "hidden";
-        welcomeRegionMessage.style.width = "0";
-        welcomeRegionMessage.style.maxHeight = "0";
-        welcomeRegionMessage.style.padding = "0";
-        welcomeRegionMessage.textContent = "";
+    } else if (start == false && welcomeMessageIsActive) { /* Hide the welcome message */
+        setWelcomeMessageAnimation(false);
+        /* The current message is closed - check if another message wanted to be displayed */
+        if (welcomeMessageList.length > 0) {
+            setTimeout(function() { setWelcome(true, welcomeMessageList.shift()); }, VALUES_welcome_message_delay_between);
+        }
+        /* welcomeRegionMessage.innerHTML = ""; */
+    }
+}
+
+function setWelcomeMessageAnimation(starting) {
+    if (starting == true && welcomeMessageIsActive == false) {
+        welcomeMessageIsActive = true;
+        welcomeRegionMessage.classList.remove('welcomeMessageEnd'); /* Remove welcome end animation */
+        welcomeRegionMessage.classList.add('welcomeMessageStart'); /* Add welcome start animation */
+    } else if (starting == false && welcomeMessageIsActive == true) {
+        welcomeMessageIsActive = false;
+        welcomeRegionMessage.classList.remove('welcomeMessageStart'); /* Remove welcome start animation */
+        welcomeRegionMessage.classList.add('welcomeMessageEnd'); /* Add welcome end animation */
     }
 }
 

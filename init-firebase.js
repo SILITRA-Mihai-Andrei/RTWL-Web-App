@@ -45,31 +45,6 @@ function isRegionRegistered(region) {
     return -1;
 }
 
-/* Initialize all elements from HTML file */
-function initElements() {
-    currentRegionWeather = document.getElementById("currentRegionWeather");
-    hideMarkersBtn = document.getElementById("btnHideMarkers");
-    locationTrackingIcon = document.getElementById("btnEnableLocationTracking");
-    enableLocationBtn = document.getElementById("btnEnableLocation");
-    welcomeRegionMessage = document.getElementById("welcomeRegion");
-    /* Set icon for buttons */
-    hideMarkersBtn.src = VALUES_hide_map_markers;
-    locationTrackingIcon.src = VALUES_enable_location_tracking;
-    enableLocationBtn.src = VALUES_enable_location;
-    /* Hide the current region weather icon */
-    currentRegionWeather.style.visibility = "hidden";
-    /* Set a welcome message when the map is ready */
-    setWelcome(true, undefined);
-    /* Add listeners for map */
-    /* When zoom is changed, draged or tilesloaded
-        check if the minimum zoom is big enough to display region weather 
-    */
-    map.addListener("zoom_changed", onMapEvent, false);
-    map.addListener("dragend", onMapEvent, false);
-    map.addListener("tilesloaded", onMapEvent, false);
-    /* Set currentPosition to a default coordinates - to detect if the location was moved or updated */
-}
-
 /* Write data to database */
 /* TESTING */
 function writeUserData(userId, name, email) {

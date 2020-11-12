@@ -64,15 +64,17 @@ const VALUES_NOT_UPDATED_LOCATION = {
     lng: 0.0
 };
 /* Welcome region - when the user enters a region or any messaje */
-const VALUES_welcome_region_width = "20vw";
-const VALUES_welcome_region_max_height = "20%"
-const VALUES_welcome_region_padding = "1%";
-const VALUES_welcome_message_duration = 15000;
+const VALUES_welcome_message_duration = 5000;
+const VALUES_welcome_message_delay_between = 500;
+const VALUES_welcome_message_opacity = "0.75";
 
 /* Colors for weather text in InfoWindow */
 const VALUES_weather_color_low_danger = "#fff";
 const VALUES_weather_color_medium_danger = "#f70";
 const VALUES_weather_color_high_danger = "#F03";
+const VALUES_weather_area_color_low_danger = "rgba(0, 255, 0, " + VALUES_welcome_message_opacity + ")";
+const VALUES_weather_area_color_medium_danger = "rgba(255, 120, 0, " + VALUES_welcome_message_opacity + ")";
+const VALUES_weather_area_color_high_danger = "rgba(255, 0, 0, " + VALUES_welcome_message_opacity + ")";
 
 /* Color for app title in welcome message */
 const STRING_PLACEHOLDER_WELCOME_MESSAGE_APP_TITLE_STYLE = "#f70";
