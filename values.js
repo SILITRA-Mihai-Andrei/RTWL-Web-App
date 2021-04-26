@@ -1,44 +1,60 @@
 /* Database configuration for FireBase - mihai.silitra@student.usv.ro */
 const VALUES_firebaseConfig = {
-    apiKey: "AIzaSyBwafdQtEEbxs3kM3axkvzypdlQEzgGn6M",
-    authDomain: "real-time-weather-location.firebaseapp.com",
-    databaseURL: "https://real-time-weather-location.firebaseio.com",
-    projectId: "real-time-weather-location",
-    storageBucket: "real-time-weather-location.appspot.com",
-    messagingSenderId: "529180953763",
-    appId: "1:529180953763:web:84e8ee46a02938c7d08316",
-    measurementId: "G-6H96WBKDH3"
+    apiKey: "AIzaSyBOp58iOEsXXXXXX-laNWDSs8r1JXXXXXX",
+    authDomain: "my-domain.firebaseapp.com",
+    databaseURL: "https://my-domain.firebaseio.com",
+    projectId: "my-project-id",
+    storageBucket: "my-project-name.appspot.com",
+    messagingSenderId: "529180XXXXXX",
+    appId: "1:529180XXXXXX:web:84e8ee4XXXXXXXXXXXXXXX",
+    measurementId: "G-XXX6XXKXXX"
 };
+
+/* Weathers string */
+const VALUES_weather_string = {
+    0: "Sunny",
+    1: "Sun",
+    2: "Heat",
+    3: "Soft rain",
+    4: "Moderate rain",
+    5: "Torrential rain",
+    6: "Soft wind",
+    7: "Moderate wind",
+    8: "Torrential wind",
+    9: "Soft snow fall",
+    10: "Moderate snow fall",
+    11: "Massive snow fall",
+}
 
 /* Icon for each weather marker */
 const VALUES_weather_icons = {
-    "Sunny": "https://i94.servimg.com/u/f94/19/39/15/82/sunny10.png",
-    "Sun": "https://i94.servimg.com/u/f94/19/39/15/82/sun10.png",
-    "Heat": "https://i94.servimg.com/u/f94/19/39/15/82/heat10.png",
-    "Soft rain": "https://i94.servimg.com/u/f94/19/39/15/82/soft_r10.png",
-    "Moderate rain": "https://i94.servimg.com/u/f94/19/39/15/82/modera10.png",
-    "Torrential rain": "https://i94.servimg.com/u/f94/19/39/15/82/torren10.png",
-    "Soft wind": "https://i94.servimg.com/u/f94/19/39/15/82/soft_w10.png",
-    "Moderate wind": "https://i94.servimg.com/u/f94/19/39/15/82/modera12.png",
-    "Torrential wind": "https://i94.servimg.com/u/f94/19/39/15/82/torren11.png",
-    "Soft snow fall": "https://i94.servimg.com/u/f94/19/39/15/82/soft_s10.png",
-    "Moderate snow fall": "https://i94.servimg.com/u/f94/19/39/15/82/modera11.png",
-    "Massive snow fall": " https://i94.servimg.com/u/f94/19/39/15/82/massiv10.png"
+    "Sunny": "../sunny10.png",
+    "Sun": "../sun10.png",
+    "Heat": "../heat10.png",
+    "Soft rain": "../soft_r10.png",
+    "Moderate rain": "../modera10.png",
+    "Torrential rain": "../torren10.png",
+    "Soft wind": "../soft_w10.png",
+    "Moderate wind": "../modera12.png",
+    "Torrential wind": "../torren11.png",
+    "Soft snow fall": "../soft_s10.png",
+    "Moderate snow fall": "../modera11.png",
+    "Massive snow fall": "../massiv10.png"
 };
 /* Icon for moving device */
-const VALUES_moving_location_icon = " https://i94.servimg.com/u/f94/19/39/15/82/moving11.png";
+const VALUES_moving_location_icon = "../moving11.png";
 /* Icon for hiding markers on map */
-const VALUES_hide_map_markers = "https://i94.servimg.com/u/f94/19/39/15/82/246x0w10.jpg";
+const VALUES_hide_map_markers = "../246x0w10.jpg";
 /* Icon for showing markers on map */
-const VALUES_show_map_markers = "https://i94.servimg.com/u/f94/19/39/15/82/246x0w10.jpg";
+const VALUES_show_map_markers = "../246x0w10.jpg";
 /* Icon for enabling location */
-const VALUES_enable_location = "https://i.servimg.com/u/f94/19/39/15/82/moving11.png";
+const VALUES_enable_location = "../moving11.png";
 /* Icon for disabling location */
-const VALUES_disabling_location = "https://i94.servimg.com/u/f94/19/39/15/82/moving12.png";
+const VALUES_disabling_location = "../moving12.png";
 /* Icon for enabling location tracking */
-const VALUES_enable_location_tracking = "https://i.servimg.com/u/f94/19/39/15/82/locati11.png";
+const VALUES_enable_location_tracking = "../locati11.png";
 /* Icon for disabling location tracking */
-const VALUES_disabling_location_tracking = "https://i.servimg.com/u/f94/19/39/15/82/locati10.png";
+const VALUES_disabling_location_tracking = "../locati10.png";
 
 /* Weather conditions by danger level (for region area color) */
 const VALUES_weather_key_medium_danger = "Sun Moderate Rain Moderate wind Moderate snow fall";
@@ -97,6 +113,18 @@ const STRING_PLACEHOLDER_WEATHER_COLOR = "REPLACE_COLOR_WEATHER";
 const STRING_PLACEHOLDER_AIR_DATA = "REPLACE_AIR_DATA";
 const STRING_PLACEHOLDER_AIR_DATA_MIDDLE_GRADIENT_BAR = "REPLACE_AIR_MIDDLE_GRADIENT_BAR";
 const STRING_PLACEHOLDER_AIR_DATA_STOP_GRADIENT_BAR = "REPLACE_AIR_STOP_GRADIENT_BAR";
+/* Placeholders for custom InfoWindow PREDICTIONS style */
+const STRING_PLACEHOLDER_PREDICTION1 = "REPLACE_PREDICTION1";
+const STRING_PLACEHOLDER_PREDICTION2 = "REPLACE_PREDICTION2";
+const STRING_PLACEHOLDER_PREDICTION3 = "REPLACE_PREDICTION3";
+const STRING_PLACEHOLDER_PREDICTION_TIME = "REPLACE_PREDICTION_TIME";
+const STRING_PLACEHOLDER_PREDICTION_IMAGE = "REPLACE_PREDICTION_IMAGE";
+const STRING_PLACEHOLDER_PREDICTION_PERCENT = "REPLACE_PREDICTION_PERCENT";
+const STRING_PLACEHOLDER_PREDICTION_WEATHER = "REPLACE_PREDICTION_WEATHER";
+const STRING_PLACEHOLDER_PREDICTION_TEMPERATURE = "REPLACE_PREDICTION_TEMPERATURE";
+const STRING_PLACEHOLDER_PREDICTION_TEMPERATURE_PERCENT = "REPLACE_PREDICTION_TEMPERATURE_PERCENT";
+const STRING_PLACEHOLDER_PREDICTION_HUMIDITY = "REPLACE_PREDICTION_HUMIDITY";
+const STRING_PLACEHOLDER_PREDICTION_HUMIDITY_PERCENT = "REPLACE_PREDICTION_HUMIDITY_PERCENT";
 
 /* Welcome message - when the map is initilized */
 const VALUES_welcome_message_map_init = "Welcome to <br> <span style='color: " + STRING_PLACEHOLDER_WELCOME_MESSAGE_APP_TITLE_STYLE +
@@ -120,20 +148,65 @@ const STRING_CATCH_GEOLOCATION_UNKNOWN_ERROR = "An unknown error occurred.";
 
 /* Template for custom InfoWindow */
 const VALUES_contentInfoWindows =
-    "<table><tr>" +
-    "<th> Region <br>" + STRING_PLACEHOLDER_REGION + "</th>" +
-    "<th style='color: " + STRING_PLACEHOLDER_WEATHER_COLOR + "'>" + STRING_PLACEHOLDER_WEATHER + "</th>" +
+    "<table class='infoWindow'><tr>" +
+    "<th style='padding: 20px 5% 20px 10%; width: 50%;'> Region <br>" + STRING_PLACEHOLDER_REGION + "</th>" +
+    "<th style='color: " + STRING_PLACEHOLDER_WEATHER_COLOR + "; padding: 0 10% 0 5%; font-size: 20px; width: 50%;'>" + STRING_PLACEHOLDER_WEATHER + "</th>" +
     "</tr><tr>" +
     "<td>Temperature: <br>" + STRING_PLACEHOLDER_TEMPERATURE + "&#8451;</td>" +
     "<td>Humidity: <br>" + STRING_PLACEHOLDER_HUMIDITY + "%</td>" +
     "</tr><tr>" +
-    "<td id='airQualityRow' colspan='2'> Air quality: <br>" +
-    "<div id='myProgress'><div id='myBar' style='width: " + STRING_PLACEHOLDER_AIR_DATA + "; " +
+    "<td>Air quality: " + STRING_PLACEHOLDER_AIR +
+    "%</td><td><div id='myProgress'><div id='myBar' style='width: " + STRING_PLACEHOLDER_AIR_DATA + "; " +
     "background-image: linear-gradient( to right, " + "rgb(0, 255, 0), " +
     "rgb(" + STRING_PLACEHOLDER_AIR_DATA_MIDDLE_GRADIENT_BAR +
     "), rgb(" + STRING_PLACEHOLDER_AIR_DATA_STOP_GRADIENT_BAR + "));'" +
-    ">" + STRING_PLACEHOLDER_AIR + "%</div></div>" +
-    "</td></tr></table>";
+    ">_</div></div>" +
+    "</td></tr>" +
+    "<tr><td colspan='2' style='padding: 0 0 0 0;'>" +
+    "<table id='infoWindowPredsictions' style='width: 100%; height: auto;'><tr>" +
+    "<td style='padding: 0 0 0 0;'>" + STRING_PLACEHOLDER_PREDICTION1 +
+    "</td><td style='padding: 0 0 0 0;'>" + STRING_PLACEHOLDER_PREDICTION2 +
+    "</td><td style='padding: 0 0 0 0;'>" + STRING_PLACEHOLDER_PREDICTION3 + "</td> " +
+    "</tr></table></td></tr></table>";
 
 const VALUES_contentInfoWindowCorrupted =
     "<div id='corrupted_data_infowindow'>" + STRING_CATCH_INVALID_RECEIVED_DATA + "</div>";
+
+/* InfoWindow for prediction */
+const VALUES_contentInfoWindowsPrediction =
+    "<table id='infoWindowPredictionsChild' style='width: 100%; height: auto;'>" +
+    "<tr><th>" + STRING_PLACEHOLDER_PREDICTION_TIME + "<br>" + STRING_PLACEHOLDER_PREDICTION_PERCENT +
+    "%</th><th><img src='" + STRING_PLACEHOLDER_PREDICTION_IMAGE +
+    "'></th></tr><tr><td colspan='2'>" + STRING_PLACEHOLDER_PREDICTION_WEATHER +
+    "</td></tr><tr><td><img width='15%' src='../Icons/temperature.jpg'> " + STRING_PLACEHOLDER_PREDICTION_TEMPERATURE +
+    "&#8451;</td><td>" + STRING_PLACEHOLDER_PREDICTION_TEMPERATURE_PERCENT +
+    "%</td></tr><tr><td><img width='15%' src='../Icons/humidity.jpg'> " + STRING_PLACEHOLDER_PREDICTION_HUMIDITY +
+    "%</td><td>" + STRING_PLACEHOLDER_PREDICTION_HUMIDITY_PERCENT + "%</td></tr></table>";
+/**
+ <table id="infoWindowPredictionsChild" style="width: 100%; height: auto;">
+    <tr>
+        <th>21:11</td>
+        <th><img src="../Icons/sun.png"></td>
+        <th>17%</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Sunny</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <img width="15%" src="../Icons/temperature.jpg"> 12&#8451;
+        </td>
+        <td></td>
+        <td>32%</td>
+    </tr>
+    <tr>
+        <td>
+            <img width="15%" src="../Icons/humidity.jpg"> 34%
+        </td>
+        <td></td>
+        <td>19%</td>
+    </tr>
+</table>
+ */
