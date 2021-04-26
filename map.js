@@ -125,6 +125,7 @@ function readyToGetDataBaseData() {
     /* For each new data, old markers and polygons are removed and replaced */
     clearMarkers();
     markers = [];
+    markersArea = [];
     /* Add a marker for each region in database */
     for (let i = 0; i < weatherRegions.length; i++) {
         addMarker(weatherRegions[i], weatherData[i]);
@@ -248,7 +249,7 @@ function addLocationMarker(position, icon) {
     currentPositionMarker = new google.maps.Marker({
         /* If the position is not updated, take the default location */
         position: isLocationUpdated(position) ?
-            new google.maps.LatLng(VALUES_mapStartCoordinates.lat, VALUES_mapStartCoordinates.lng) : position,
+            position : new google.maps.LatLng(VALUES_mapStartCoordinates.lat, VALUES_mapStartCoordinates.lng),
         map: map,
     });
     //  alert(isLocationUpdated(position) + " " + position);
@@ -312,8 +313,6 @@ function hideMarkers() {
         hideMarkersBtn.src = VALUES_hide_map_markers;
         /* Show all markers and polygons */
         showMarkers();
-        /* TESTING */
-        setWelcome(true, markers[1]);
     }
 }
 
@@ -337,6 +336,8 @@ function getInfoWindow(region, regionData) {
     let weather_color = getWeatherColor(regionData["weather"]);
     /* Get gradient for air quality bar depending on percent */
     let gradient_for_air_bar = getGradientForAirBar(regionData["air"]);
+    /* Store the predictions for region */
+    let predictions = [];
     /* Replace placeholders with the region data */
     try {
         infoWindowContent = infoWindowContent
@@ -349,12 +350,41 @@ function getInfoWindow(region, regionData) {
             .replace(STRING_PLACEHOLDER_AIR_DATA, regionData["air"] + "%")
             .replace(STRING_PLACEHOLDER_AIR_DATA_MIDDLE_GRADIENT_BAR, gradient_for_air_bar["MIDDLE"])
             .replace(STRING_PLACEHOLDER_AIR_DATA_STOP_GRADIENT_BAR, gradient_for_air_bar["STOP"]);
+
+        /* Check if prediction lists are valid and have data */
+        if (predictionData != null && predictionData != undefined && predictionRegions != null && predictionRegions != undefined) {
+            let index = isRegionRegistered(predictionRegions, region); // calculate the region index in list
+            /* Check if the index is valid and the prediction for the current region exists and are valid */
+            if (index >= 0 && index <= 11 && predictionData[index] != undefined && predictionData[index] != null) {
+                let i = 0; // index of the prediction (there are 3 predictions)
+                /* Get through all 3 predictions */
+                for (const [k, val] of Object.entries(predictionData[index])) {
+                    let time = k.split(":"); // split the time to get only the hour and minute
+                    /* Replace the placeholder with the prediction data */
+                    predictions[i++] = VALUES_contentInfoWindowsPrediction
+                        .replace(STRING_PLACEHOLDER_PREDICTION_TIME, time[3] + ":" + time[4])
+                        .replace(STRING_PLACEHOLDER_PREDICTION_IMAGE, VALUES_weather_icons[VALUES_weather_string[getRegionIndex(val['code'])]])
+                        .replace(STRING_PLACEHOLDER_PREDICTION_PERCENT, val['code_p'])
+                        .replace(STRING_PLACEHOLDER_PREDICTION_WEATHER, VALUES_weather_string[getRegionIndex(val['code'])])
+                        .replace(STRING_PLACEHOLDER_PREDICTION_TEMPERATURE, val['temperature'])
+                        .replace(STRING_PLACEHOLDER_PREDICTION_TEMPERATURE_PERCENT, val['temperature_p'])
+                        .replace(STRING_PLACEHOLDER_PREDICTION_HUMIDITY, val['humidity'])
+                        .replace(STRING_PLACEHOLDER_PREDICTION_HUMIDITY_PERCENT, val['humidity_p']);
+                }
+
+                /* Replace all placeholders for prediction with the prediction data builded above */
+                infoWindowContent = infoWindowContent
+                    .replace(STRING_PLACEHOLDER_PREDICTION1, predictions[0])
+                    .replace(STRING_PLACEHOLDER_PREDICTION2, predictions[1])
+                    .replace(STRING_PLACEHOLDER_PREDICTION3, predictions[2])
+            }
+        }
     } catch (err) { /* Catch errors */
         if (isValidData == true) {
             if (err instanceof ReferenceError) {
                 alert(STRING_CATCH_CORRUPTED_RECEIVED_DATA);
             } else {
-                alert(STRING_CATCH_INVALID_RECEIVED_DATA);
+                alert(STRING_CATCH_INVALID_RECEIVED_DATA + "\n" + err);
             }
             isValidData = false;
         }
@@ -444,12 +474,9 @@ function checkDangerRegion(moving) {
         return false;
     }
     let marker = getRegionMarker(false); /* Get the current region marker */
-    if (marker != currentPositionMarker) {
-        let weather = weatherData[markers.indexOf(getRegionMarker(true))]["weather"];
-        alert("You entered in a " + weather + " weather!");
+    if (marker != currentPositionMarker && marker != undefined) {
         setWelcome(true, marker);
     } else {
-        alert("Nothing!");
         setWelcome(false, null);
     }
 }
@@ -534,14 +561,23 @@ function setWelcome(start, marker) {
             welcomeRegionMessage.innerHTML = VALUES_welcome_message_map_init;
         } else {
             let weather = weatherData[markers.indexOf(marker)];
+            let danger;
             welcomeRegionMessage.style.backgroundColor = getWeatherAreaColor(weather["weather"]);
+            /* Check if prediction lists are valid and have data */
+            if (dangerData != null && dangerData != undefined && dangerRegions != null && dangerRegions != undefined) {
+                let index = isRegionRegistered(dangerRegions, marker.getTitle()); // calculate the region index in list
+                /* Check if the index is valid and the prediction for the current region exists and are valid */
+                if (index >= 0 && index <= 11 && dangerData[index] != undefined && dangerData[index] != null) {
+                    danger = dangerData[index];
+                }
+            }
             welcomeRegionMessage.innerHTML =
                 VALUES_welcome_message_content
                 .replace(STRING_PLACEHOLDER_WEATHER, weather["weather"])
                 .replace(STRING_PLACEHOLDER_TEMPERATURE, weather["temperature"])
                 .replace(STRING_PLACEHOLDER_HUMIDITY, weather["humidity"])
                 .replace(STRING_PLACEHOLDER_AIR, weather["air"])
-                .replace(STRING_PLACEHOLDER_DANGER, "None");
+                .replace(STRING_PLACEHOLDER_DANGER, danger);
         }
         setWelcomeMessageAnimation(true);
         /* Set timeout for closing the message after a time */
