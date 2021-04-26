@@ -102,12 +102,13 @@
             table {
                 /* All data is aranged in the middle of the cell */
                 text-align: center;
+                font-size: 14px;
                 /* The cells are united - no space between them */
                 border-collapse: collapse;
                 /* Text color for the whole InfoWindow */
                 color: white;
                 /* Fixed width for InfoWindow */
-                width: 230px;
+                width: 400px;
                 /* Fixed height for InfoWindow */
                 height: 150px;
             }
@@ -115,10 +116,9 @@
             
             td,
             th {
-                /* Top and bottom padding */
-                padding: 5% 0 5% 0;
+                padding: 10px 5px 10px 5px;
                 /* Arrang data in middle - horizontal */
-                width: 50%;
+                width: 33.33333%;
                 /* Arrange data in middle - vertical */
                 vertical-align: middle;
             }
@@ -132,24 +132,20 @@
             td {
                 background-color: rgba(79, 138, 31, 0.9);
             }
-            /* The first cell (Region title) */
             
-            th:first-child {
-                padding-left: 10%;
-                padding-right: 5%;
+            #infoWindowPredictionsChild {
+                border: 1px solid black;
+                padding: 0 0 0 0;
             }
-            /* The second cell (Region weather) */
+            /* The image of temperature and humidity from prediction card */
             
-            th:last-child {
-                padding-right: 10%;
-                padding-left: 5%;
-                /* Increase font size for Region weather */
-                font-size: 16px;
+            #infoWindowPredictionsChild tr td img {
+                width: 25%;
             }
+            /* The weather image from prediction card */
             
-            #airQualityRow {
-                /* Remove padding for the air quality cell */
-                padding-top: 0;
+            #infoWindowPredictionsChild tr th img {
+                width: 40px;
             }
             /* Air quality bar */
             
